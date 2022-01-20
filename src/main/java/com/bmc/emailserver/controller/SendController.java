@@ -11,17 +11,18 @@ import com.bmc.emailserver.YahooEmail;
 @Path("/email")
 public class SendController {
 
-	private final YahooEmail yahooEmail;
-	
-	@Inject
-	public SendController(YahooEmail yahooEmail) {
-		this.yahooEmail = yahooEmail;
-	}
+//	private final YahooEmail yahooEmail;
+//	
+//	@Inject
+//	public SendController(YahooEmail yahooEmail) {
+//		this.yahooEmail = yahooEmail;
+//	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public void get() {
-		this.yahooEmail.send();
+		System.out.println("PASOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+		//this.yahooEmail.send();
 	}
 	
 }

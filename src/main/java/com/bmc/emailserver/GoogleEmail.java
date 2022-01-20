@@ -34,7 +34,7 @@ public class GoogleEmail {
 
             protected PasswordAuthentication getPasswordAuthentication() {
 
-                return new PasswordAuthentication("martin.dymenstein@gmail.com", "3345531Ebcfh9");
+                return new PasswordAuthentication("martin.dymenstein@gmail.com", "xx");
 
             }
 
