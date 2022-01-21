@@ -28,7 +28,6 @@ public class SendYahoo extends AbstractSendMail {
                      protected PasswordAuthentication getPasswordAuthentication()
                      {
                     	 return new PasswordAuthentication("martin.dymenstein@yahoo.com", "oejtgdmwxgjarjnp");
-                         //return new PasswordAuthentication("bmcsoftware@yahoo.com.br", "oejtgdmwxgjarjnp");
                      }
                 });
 
