@@ -25,9 +25,9 @@ public class GoogleEmail {
         // Get system properties
         Properties prop = new Properties();
  		prop.put("mail.smtp.host", "smtp.gmail.com");
-         prop.put("mail.smtp.port", "587");
-         prop.put("mail.smtp.auth", "true");
-         prop.put("mail.smtp.starttls.enable", "true"); //TLS
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); //TLS
 
         // Get the Session object.// and pass username and password
         Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
