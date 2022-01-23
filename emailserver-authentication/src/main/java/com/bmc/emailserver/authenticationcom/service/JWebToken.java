@@ -1,4 +1,4 @@
-package com.bmc.emailserver.authentication;
+package com.bmc.emailserver.authenticationcom.service;
 
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
@@ -35,12 +35,13 @@ public class JWebToken {
         encodedHeader = encode(new JSONObject(JWT_HEADER));
     }
 
-    public JWebToken(JSONObject payload) {
-        this(payload.getString("sub"), payload.getJSONArray("aud"), payload.getLong("exp"));
-    }
+//    public JWebToken(JSONObject payload) {
+//        this(payload.getString("sub"), payload.getJSONArray("aud"), payload.getLong("exp"));
+//    }
 
-    public JWebToken(String sub, JSONArray aud, long expires) {
+    public JWebToken(String sub, JSONArray aud, long expires, String user) {
         this();
+        payload.put("user", user);
         payload.put("sub", sub);
         payload.put("aud", aud);
         payload.put("exp", expires);
