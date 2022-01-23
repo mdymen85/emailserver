@@ -2,20 +2,28 @@ package com.bmc.emailserver.authenticationcom.service;
 
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 /**
  *
@@ -24,119 +32,35 @@ import org.json.JSONObject;
 public class JWebToken {
 
     private static final String SECRET_KEY = "FREE_MASON"; //@TODO Add Signature here
-    private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
-    private static final String ISSUER = "mason.metamug.net";
-    private static final String JWT_HEADER = "{\"alg\":\"HS256\",\"typ\":\"JWT\"}";
-    private JSONObject payload = new JSONObject();
-    private String signature;
-    private String encodedHeader;
+    
+    public static String createJWT(String id, String issuer, String subject, long ttlMillis) {
+    	  
+        //The JWT signature algorithm we will be using to sign the token
+        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
-    private JWebToken() {
-        encodedHeader = encode(new JSONObject(JWT_HEADER));
-    }
+        long nowMillis = System.currentTimeMillis();
+        Date now = new Date(nowMillis);
 
-//    public JWebToken(JSONObject payload) {
-//        this(payload.getString("sub"), payload.getJSONArray("aud"), payload.getLong("exp"));
-//    }
+        //We will sign our JWT with our ApiKey secret
+        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(SECRET_KEY);
+        Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
-    public JWebToken(String sub, JSONArray aud, long expires, String user) {
-        this();
-        payload.put("user", user);
-        payload.put("sub", sub);
-        payload.put("aud", aud);
-        payload.put("exp", expires);
-        payload.put("iat", LocalDateTime.now().toEpochSecond(ZoneOffset.UTC));
-        payload.put("iss", ISSUER);
-        payload.put("jti", UUID.randomUUID().toString()); //how do we use this?
-        signature = hmacSha256(encodedHeader + "." + encode(payload), SECRET_KEY);
-    }
-
-    /**
-     * For verification
-     *
-     * @param token
-     * @throws java.security.NoSuchAlgorithmException
-     */
-    public JWebToken(String token) throws NoSuchAlgorithmException {
-        this();
-        String[] parts = token.split("\\.");
-        if (parts.length != 3) {
-            throw new IllegalArgumentException("Invalid Token format");
-        }
-        if (encodedHeader.equals(parts[0])) {
-            encodedHeader = parts[0];
-        } else {
-            throw new NoSuchAlgorithmException("JWT Header is Incorrect: " + parts[0]);
-        }
-
-        payload = new JSONObject(decode(parts[1]));
-        if (payload.isEmpty()) {
-            throw new JSONException("Payload is Empty: ");
-        }
-        if (!payload.has("exp")) {
-            throw new JSONException("Payload doesn't contain expiry " + payload);
-        }
-        signature = parts[2];
-    }
-
-    @Override
-    public String toString() {
-        return encodedHeader + "." + encode(payload) + "." + signature;
-    }
-
-    public boolean isValid() {
-        return payload.getLong("exp") > (LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)) //token not expired
-                && signature.equals(hmacSha256(encodedHeader + "." + encode(payload), SECRET_KEY)); //signature matched
-    }
-
-    public String getSubject() {
-        return payload.getString("sub");
-    }
-
-    public List<String> getAudience() {
-        JSONArray arr = payload.getJSONArray("aud");
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < arr.length(); i++) {
-            list.add(arr.getString(i));
-        }
-        return list;
-    }
-
-    private static String encode(JSONObject obj) {
-        return encode(obj.toString().getBytes(StandardCharsets.UTF_8));
-    }
-
-    private static String encode(byte[] bytes) {
-        return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
-    }
-
-    private static String decode(String encodedString) {
-        return new String(Base64.getUrlDecoder().decode(encodedString));
-    }
-
-    /**
-     * Sign with HMAC SHA256 (HS256)
-     *
-     * @param data
-     * @return
-     * @throws Exception
-     */
-    private String hmacSha256(String data, String secret) {
-        try {
-
-            //MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = secret.getBytes(StandardCharsets.UTF_8);//digest.digest(secret.getBytes(StandardCharsets.UTF_8));
-
-            Mac sha256Hmac = Mac.getInstance("HmacSHA256");
-            SecretKeySpec secretKey = new SecretKeySpec(hash, "HmacSHA256");
-            sha256Hmac.init(secretKey);
-
-            byte[] signedBytes = sha256Hmac.doFinal(data.getBytes(StandardCharsets.UTF_8));
-            return encode(signedBytes);
-        } catch (NoSuchAlgorithmException | InvalidKeyException ex) {
-            Logger.getLogger(JWebToken.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            return null;
-        }
+        //Let's set the JWT Claims
+        JwtBuilder builder = Jwts.builder().setId(id)
+                .setIssuedAt(now)
+                .setSubject(subject)
+                .setIssuer(issuer)
+                .signWith(signatureAlgorithm, signingKey);
+      
+        //if it has been specified, let's add the expiration
+        if (ttlMillis > 0) {
+            long expMillis = nowMillis + ttlMillis;
+            Date exp = new Date(expMillis);
+            builder.setExpiration(exp);
+        }  
+      
+        //Builds the JWT and serializes it to a compact, URL-safe string
+        return builder.compact();
     }
 
 }

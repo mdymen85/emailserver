@@ -17,8 +17,7 @@ public class LoginService implements ILoginService{
 	public String createToken(Login login) {
 		
 		if (loginRepository.existUser(login.getUser(), login.getPassword())) {
-	        long exp = LocalDateTime.now().plusDays(90).toEpochSecond(ZoneOffset.UTC);
-	        String token = new JWebToken("1234", new JSONArray("['admin']"), exp, login.getUser()).toString();
+	        String token = JWebToken.createJWT("1", login.getUser(), "", 360000);
 			return token;
 		}
 		

@@ -12,6 +12,7 @@ import com.bmc.emailserver.authenticationcom.service.LoginService;
 public class LoginController {
 
 	private ILoginService loginService = new LoginService();
+
 	
 	@POST
 	public String createToken(Login login) {

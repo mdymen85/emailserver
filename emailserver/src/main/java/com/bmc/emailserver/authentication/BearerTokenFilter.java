@@ -4,6 +4,10 @@ import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.ext.Provider;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+
 import javax.ws.rs.container.ContainerRequestContext;
 
 import java.io.IOException;
@@ -14,8 +18,6 @@ import javax.ws.rs.NotAuthorizedException;
 
 @Provider
 @PreMatching
-//@WebFilter(filterName = "BearerTokenFilter", urlPatterns = { "/email" })
-//@WebFilter("/*")
 public class BearerTokenFilter implements ContainerRequestFilter {
 	
    public void filter(ContainerRequestContext ctx) throws IOException {
@@ -27,6 +29,15 @@ public class BearerTokenFilter implements ContainerRequestFilter {
       }
    }
 
-   private String parseToken(String header) {return "";}
+   private String parseToken(String token) {
+	
+	   Claims x = (Claims) Jwts.parser()
+			   .setSigningKey("FREE_MASON")
+			   .parseClaimsJws(token)
+			   .getBody();
+	   
+	   return "";
+	  
+   }
    private boolean verifyToken(String token) {return false;}
 }
