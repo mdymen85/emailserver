@@ -9,7 +9,7 @@ public class SendGmail extends AbstractSendMail {
 	}
 
 	@Override
-	public void loadSession() {
+	public void loadSession(MessageToSend messageToSend) {
 		// TODO Auto-generated method stub
 		
 	}

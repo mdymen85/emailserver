@@ -22,12 +22,13 @@ public class SendYahoo extends AbstractSendMail {
 	}
 
 	@Override
-	public void loadSession() {
+	public void loadSession(MessageToSend messageToSend) {
         Session session = Session.getDefaultInstance(this.getProperties(),
                 new javax.mail.Authenticator() {
                      protected PasswordAuthentication getPasswordAuthentication()
                      {
-                    	 return new PasswordAuthentication("martin.dymenstein@yahoo.com", "oejtgdmwxgjarjnp");
+                    	 return new PasswordAuthentication(messageToSend.getFrom(), messageToSend.getPassword());
+                    	 //return new PasswordAuthentication("martin.dymenstein@yahoo.com", "oejtgdmwxgjarjnp");
                      }
                 });
 

@@ -10,6 +10,8 @@ import javax.mail.internet.AddressException;
 import com.bmc.emailserver.dto.MessageDTO;
 
 public class SendMail {
+	
+	private static String HOST_REGEX = "(?<=@)\\\\S+";
 
 	public void sendMail(MessageDTO messageDTO) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException {
 		

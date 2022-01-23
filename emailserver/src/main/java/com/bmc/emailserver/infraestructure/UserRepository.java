@@ -10,6 +10,7 @@ import com.bmc.emailserver.domain.repository.UserEmailEntity;
 
 public class UserRepository implements IUserRepository {
 
+	@Override
 	public User loadUserEmails(String username) {
 		Set<UserEmailEntity> userEmailsEntity = this.findEmailsByUsername(username);
 		
@@ -41,12 +42,11 @@ public class UserRepository implements IUserRepository {
 		
 	}
 	
-	@Override
-	public Set<UserEmailEntity> findEmailsByUsername(String username) {
+	private Set<UserEmailEntity> findEmailsByUsername(String username) {
 		
 		var yahoo = UserEmailEntity.builder()
 				.email("martin.dymenstein@yahoo.com")
-				.password("")
+				.password("oejtgdmwxgjarjnp")
 				.username("admin")
 				.build();
 

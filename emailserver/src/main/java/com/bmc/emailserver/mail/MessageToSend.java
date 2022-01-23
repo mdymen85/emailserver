@@ -17,7 +17,7 @@ public class MessageToSend {
 	private String password;
 	
 	@Builder
-	public MessageToSend(String from, Set<String> recipients, String subject, String text) {
+	public MessageToSend(String from, Set<String> recipients, String subject, String text, String password) {
 		
 		if (from == null || from.equals("")) {
 			throw new IllegalStateException();
@@ -39,6 +39,7 @@ public class MessageToSend {
 		this.recipients = recipients;
 		this.subject = subject;
 		this.text = text;
+		this.password = password;
 	}
 
 	

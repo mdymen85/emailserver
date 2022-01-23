@@ -17,7 +17,7 @@ public class LoginService implements ILoginService{
 	public String createToken(Login login) {
 		
 		if (loginRepository.existUser(login.getUser(), login.getPassword())) {
-	        String token = JWebToken.createJWT("1", login.getUser(), "", 360000);
+	        String token = JWebToken.createJWT("1", login.getUser(), "", 3600000);
 			return token;
 		}
 		

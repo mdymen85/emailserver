@@ -9,7 +9,7 @@ public class SendWalla extends AbstractSendMail {
 	}
 
 	@Override
-	public void loadSession() {
+	public void loadSession(MessageToSend messageToSend) {
 		// TODO Auto-generated method stub
 		
 	}

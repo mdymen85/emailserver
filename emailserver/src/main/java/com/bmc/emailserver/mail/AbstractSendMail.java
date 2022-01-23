@@ -2,6 +2,7 @@ package com.bmc.emailserver.mail;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -29,20 +30,19 @@ public abstract class AbstractSendMail {
 	private LoadProperties loadProperties = new LoadProperties();
 
 	protected abstract void loadProperties() throws IOException;
-	protected abstract void loadSession();
+	protected abstract void loadSession(MessageToSend messageToSend);
 	
-	public void send(MessageToSend messageToSend) throws AddressException, MessagingException, IOException, InterruptedException {
- 		this.loadProperties();
-		this.loadSession();
-		
+	public Set<Message> loadMessages() throws InterruptedException, MessagingException, IOException {
 		var redis = RedisSingleton.getRedisInstance();
 		
-		RMapCache<Object, Object> map = redis.redisson().getMapCache("TestMap1");
-		RFuture<Object> result = map.putAsync("5","6");
+		
+		RMapCache<Object, Object> map = redis.redisson().getMapCache("XXX");
+		var x = map.get("8");
+		
+		RFuture<Object> result = map.putAsync("8","9");
 		result.await();
 		
 		map = redis.redisson().getMapCache("TestMap1");
-		var x = map.get("5");
 		
 	     Store store = session.getStore("imaps");
 
@@ -65,22 +65,29 @@ public abstract class AbstractSendMail {
 	         System.out.println("Text: " + message.getContent().toString());
 
 	      }
+		return null;
+	}
+	
+	public void send(MessageToSend messageToSend) throws AddressException, MessagingException, IOException, InterruptedException { 	
 		
-//        Message message = new MimeMessage(session);
-//        message.setFrom(new InternetAddress(messageToSend.getFrom())); //Remetente
-//        
-//        String recipients = messageToSend.getRecipients().toString().replace("[","").replace("]", "");
-//
-//        message.setRecipients(Message.RecipientType.TO,
-//                          InternetAddress.parse(recipients)); //Destinatário(s)
-//        
-//        message.setSubject(messageToSend.getSubject());//Assunto
-//        message.setText(messageToSend.getText());
-//        
-//        /**Método para enviar a mensagem criada*/
-//        Transport.send(message);
-//		
-//		
+		this.loadProperties();
+		this.loadSession(messageToSend);		
+		
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(messageToSend.getFrom())); //Remetente
+        
+        String recipients = messageToSend.getRecipients().toString().replace("[","").replace("]", "");
+
+        message.setRecipients(Message.RecipientType.TO,
+                          InternetAddress.parse(recipients)); //Destinatário(s)
+        
+        message.setSubject(messageToSend.getSubject());//Assunto
+        message.setText(messageToSend.getText());
+        
+        /**Método para enviar a mensagem criada*/
+        Transport.send(message);
+		
+		
 	}
 	
 	protected void setProperties(Properties properties) {

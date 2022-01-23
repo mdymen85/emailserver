@@ -23,21 +23,21 @@ public class BearerTokenFilter implements ContainerRequestFilter {
    public void filter(ContainerRequestContext ctx) throws IOException {
       String authHeader = ctx.getHeaderString(HttpHeaders.AUTHORIZATION);
       if (authHeader == null) throw new NotAuthorizedException("Bearer");
-      String token = parseToken(authHeader);
-      if (verifyToken(token) == false) {
+      String user = parseToken(authHeader);
+      if (verifyToken(user) == false) {
          throw new NotAuthorizedException("Bearer error=\"invalid_token\"");
       }
    }
 
    private String parseToken(String token) {
 	
-	   Claims x = (Claims) Jwts.parser()
+	   var claims = (Claims) Jwts.parser()
 			   .setSigningKey("FREE_MASON")
 			   .parseClaimsJws(token)
 			   .getBody();
 	   
-	   return "";
+	   return claims.getIssuer();
 	  
    }
-   private boolean verifyToken(String token) {return false;}
+   private boolean verifyToken(String user) { return user != null; }
 }
