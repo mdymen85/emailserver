@@ -21,4 +21,8 @@ public class Email {
 		this.user = user;
 	}
 	
+	public String getPassword() {
+		return this.password;
+	}
+	
 }

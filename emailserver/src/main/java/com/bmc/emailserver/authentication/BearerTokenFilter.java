@@ -5,6 +5,8 @@ import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.ext.Provider;
 
+import com.bmc.emailserver.controller.TokenUtils;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
@@ -23,21 +25,11 @@ public class BearerTokenFilter implements ContainerRequestFilter {
    public void filter(ContainerRequestContext ctx) throws IOException {
       String authHeader = ctx.getHeaderString(HttpHeaders.AUTHORIZATION);
       if (authHeader == null) throw new NotAuthorizedException("Bearer");
-      String user = parseToken(authHeader);
+      String user = TokenUtils.getUsername(authHeader);
       if (verifyToken(user) == false) {
          throw new NotAuthorizedException("Bearer error=\"invalid_token\"");
       }
    }
-
-   private String parseToken(String token) {
-	
-	   var claims = (Claims) Jwts.parser()
-			   .setSigningKey("FREE_MASON")
-			   .parseClaimsJws(token)
-			   .getBody();
-	   
-	   return claims.getIssuer();
-	  
-   }
+   
    private boolean verifyToken(String user) { return user != null; }
 }

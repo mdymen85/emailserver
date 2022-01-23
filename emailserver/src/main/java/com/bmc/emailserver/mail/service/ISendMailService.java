@@ -10,6 +10,6 @@ import com.bmc.emailserver.dto.MessageDTO;
 
 public interface ISendMailService {
 
-	public void sendMail(MessageDTO messageDTO) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException;
+	public void sendMail(MessageDTO messageDTO, String username) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException;
 	
 }

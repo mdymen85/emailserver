@@ -15,6 +15,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
 //import com.auth0.jwt.JWT;
@@ -53,9 +55,17 @@ public class SendController {
 		this.yahooEmail.send();
 	}
 	
+	private String getUsername(HttpHeaders headers) {
+		var token = headers.getRequestHeaders().get("Authorization").get(0);
+		return TokenUtils.getUsername(token);
+	}
+	
 	@POST
-	public void post(MessageDTO message) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException {
-		sendMailService.sendMail(message);
+	public void post(MessageDTO message, @Context HttpHeaders headers) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException {
+		
+		var username = this.getUsername(headers); 
+		
+		sendMailService.sendMail(message, username);
 		System.out.println(message);
 		
 	}

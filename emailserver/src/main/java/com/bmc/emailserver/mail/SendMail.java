@@ -7,13 +7,15 @@ import java.util.regex.Pattern;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
+import com.bmc.emailserver.domain.User;
 import com.bmc.emailserver.dto.MessageDTO;
+import com.bmc.emailserver.redis.UserInformationService;
 
 public class SendMail {
 	
 	private static String HOST_REGEX = "(?<=@)\\\\S+";
 
-	public void sendMail(MessageDTO messageDTO) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException {
+	public void sendMail(MessageDTO messageDTO, String username) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException {
 		
 		Pattern regex = Pattern.compile("(?<=@)\\S+");
 		Matcher regexMatcher = regex.matcher(messageDTO.getFrom());
@@ -23,9 +25,11 @@ public class SendMail {
 			host = regexMatcher.group();			  
 		} 
 		
+		User user = UserInformationService.getSingletonInstance().loadUserInformation(username);
+		
 		var emailHost = this.getEmailHost(host);
 		
-		var messageToSend = this.toMessageToSend(messageDTO);
+		var messageToSend = this.toMessageToSend(messageDTO, user.getEmail(host).getPassword());
 		
 		emailHost.getSendMail().send(messageToSend);
 	}
@@ -39,13 +43,14 @@ public class SendMail {
 		throw new IllegalStateException();
 	}
 	
-	private MessageToSend toMessageToSend(MessageDTO messageDTO) {		
+	private MessageToSend toMessageToSend(MessageDTO messageDTO, String password) {		
 		return MessageToSend
 				.builder()
 				.from(messageDTO.getFrom())
 				.recipients(messageDTO.getTo())
 				.subject(messageDTO.getSubject())
 				.text(messageDTO.getBody())
+				.password(password)
 				.build();
 	}
 	

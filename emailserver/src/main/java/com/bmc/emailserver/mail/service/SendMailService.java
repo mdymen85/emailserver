@@ -16,8 +16,8 @@ public class SendMailService implements ISendMailService {
 	private SendMail sendMail = new SendMail();
 	
 	@Override
-	public void sendMail(MessageDTO messageDTO) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException {
-		this.sendMail.sendMail(messageDTO);
+	public void sendMail(MessageDTO messageDTO, String sendMail) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException {
+		this.sendMail.sendMail(messageDTO, sendMail);
 		
 	}
 
