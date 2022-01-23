@@ -5,7 +5,7 @@ import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 
 public class RedisService {
-	
+
 	protected RedisService() {}	
 	
 	public RedissonClient redisson() {		

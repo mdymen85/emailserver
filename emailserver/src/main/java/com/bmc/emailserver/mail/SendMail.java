@@ -28,8 +28,8 @@ public class SendMail {
 		emailHost.getSendMail().send(messageToSend);
 	}
 	
-	private EmailHost getEmailHost(String host) throws IllegalStateException {
-		for (EmailHost emailHost : EmailHost.values()) {
+	private FactoryEmailHost getEmailHost(String host) throws IllegalStateException {
+		for (FactoryEmailHost emailHost : FactoryEmailHost.values()) {
 			if (host.contains(emailHost.getHost())) {
 				return emailHost;
 			}
@@ -37,13 +37,13 @@ public class SendMail {
 		throw new IllegalStateException();
 	}
 	
-	private MessageToSend toMessageToSend(MessageDTO messageDTO) {
+	private MessageToSend toMessageToSend(MessageDTO messageDTO) {		
 		return MessageToSend
 				.builder()
 				.from(messageDTO.getFrom())
-				.recipients(messageDTO.getRecipients())
+				.recipients(messageDTO.getTo())
 				.subject(messageDTO.getSubject())
-				.text(messageDTO.getText())
+				.text(messageDTO.getBody())
 				.build();
 	}
 	

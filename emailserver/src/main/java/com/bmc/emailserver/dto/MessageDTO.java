@@ -10,9 +10,9 @@ import lombok.ToString;
 public class MessageDTO {
 
 	private String from;
-	private Set<String> recipients;
+	private Set<String> to;
 	private String subject;
-	private String text;
+	private String body;
 	
 	
 }

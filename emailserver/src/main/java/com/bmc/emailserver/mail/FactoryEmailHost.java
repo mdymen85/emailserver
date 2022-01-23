@@ -1,13 +1,13 @@
 package com.bmc.emailserver.mail;
 
-public enum EmailHost {
+public enum FactoryEmailHost {
 
 	YAHOO("yahoo.com", new SendYahoo()),GOOGLE("google.com", new SendGmail()),WALLA("walla.com.il", new SendWalla());
 	
 	private String host;
 	private AbstractSendMail sendMail;
 	
-	private EmailHost(String host, AbstractSendMail sendMail) {
+	private FactoryEmailHost(String host, AbstractSendMail sendMail) {
 		this.host = host;
 		this.sendMail = sendMail;
 	}

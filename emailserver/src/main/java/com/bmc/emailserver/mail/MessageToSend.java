@@ -14,6 +14,7 @@ public class MessageToSend {
 	private Set<String> recipients;
 	private String subject;
 	private String text;
+	private String password;
 	
 	@Builder
 	public MessageToSend(String from, Set<String> recipients, String subject, String text) {
