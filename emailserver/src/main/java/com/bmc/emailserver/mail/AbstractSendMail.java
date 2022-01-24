@@ -17,6 +17,7 @@ import javax.mail.internet.MimeMessage;
 import org.redisson.api.RFuture;
 import org.redisson.api.RMapCache;
 
+import com.bmc.emailserver.domain.MessageToSend;
 import com.bmc.emailserver.redis.RedisService;
 import com.bmc.emailserver.redis.RedisSingleton;
 
@@ -70,21 +71,21 @@ public abstract class AbstractSendMail {
 	
 	public void send(MessageToSend messageToSend) throws AddressException, MessagingException, IOException, InterruptedException { 	
 		
+//		https://myaccount.google.com/lesssecureapps		
 		this.loadProperties();
 		this.loadSession(messageToSend);		
 		
         Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress(messageToSend.getFrom())); //Remetente
+        message.setFrom(new InternetAddress(messageToSend.getFrom()));
         
         String recipients = messageToSend.getRecipients().toString().replace("[","").replace("]", "");
 
         message.setRecipients(Message.RecipientType.TO,
-                          InternetAddress.parse(recipients)); //Destinatário(s)
+                          InternetAddress.parse(recipients));
         
-        message.setSubject(messageToSend.getSubject());//Assunto
+        message.setSubject(messageToSend.getSubject());
         message.setText(messageToSend.getText());
         
-        /**Método para enviar a mensagem criada*/
         Transport.send(message);
 		
 		

@@ -34,14 +34,12 @@
 	    <version>1.6.2</version>
 	</dependency>
 	
-	<!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
 	<dependency>
 	    <groupId>javax.ws.rs</groupId>
 	    <artifactId>javax.ws.rs-api</artifactId>
 	    <version>2.1.1</version>
 	</dependency>
 	
-			<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 	<dependency>
 		<groupId>org.projectlombok</groupId>
 		<artifactId>lombok</artifactId>
@@ -56,7 +54,6 @@
 		    <scope>provided</scope>
 		</dependency>	
 		
-		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
 <dependency>
     <groupId>io.jsonwebtoken</groupId>
     <artifactId>jjwt</artifactId>
@@ -64,25 +61,21 @@
 </dependency>
 		
 	
-	<!-- https://mvnrepository.com/artifact/javax.inject/javax.inject -->
 	<dependency>
 	    <groupId>javax.inject</groupId>
 	    <artifactId>javax.inject</artifactId>
 	    <version>1</version>
 	</dependency>
 	
-		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 	<dependency>
 	    <groupId>javax.mail</groupId>
 	    <artifactId>mail</artifactId>
 	    <version>1.5.0-b01</version>
 	</dependency>
 	
-		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.ext.cdi/jersey-cdi1x-servlet -->
 	<dependency>
 	    <groupId>org.glassfish.jersey.ext.cdi</groupId>
 	    <artifactId>jersey-cdi1x-servlet</artifactId>
-<!-- 	    <version>2.29.1</version> -->
 	</dependency>
 		
 		
@@ -118,30 +111,6 @@
       <version>${grizzly.version}</version>
     </dependency>
     
-<!--     <dependency> -->
-<!-- 	    <groupId>io.jsonwebtoken</groupId> -->
-<!-- 	    <artifactId>jjwt-api</artifactId> -->
-<!-- 	    <version>0.11.1</version> -->
-<!-- 	</dependency> -->
-<!-- 	<dependency> -->
-<!-- 	    <groupId>io.jsonwebtoken</groupId> -->
-<!-- 	    <artifactId>jjwt-impl</artifactId> -->
-<!-- 	    <version>0.11.1</version> -->
-<!-- 	    <scope>runtime</scope> -->
-<!-- 	</dependency> -->
-<!-- 	<dependency> -->
-<!-- 	    <groupId>io.jsonwebtoken</groupId> -->
-<!-- 	    <artifactId>jjwt-jackson</artifactId> -->
-<!-- 	    <version>0.11.1</version> -->
-<!-- 	    <scope>runtime</scope> -->
-<!-- 	</dependency> -->
-
-<!-- 	<dependency> -->
-<!-- 	    <groupId>com.auth0</groupId> -->
-<!-- 	    <artifactId>java-jwt</artifactId> -->
-<!-- 	    <version>3.18.3</version> -->
-<!-- 	</dependency> -->
-<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-databind</artifactId>

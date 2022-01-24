@@ -1,12 +1,15 @@
 package com.bmc.emailserver.domain;
 
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 import lombok.Builder;
 
-public class User {
+public class User implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private final String username;
 	private Set<Email> emails;
 
@@ -20,6 +23,9 @@ public class User {
 	}
 	
 	public void addEmail(Email email) {
+		if (this.emails == null) {
+			this.emails = new HashSet<Email>();
+		}
 		this.emails.add(email);
 		email.setUser(this);
 	}
@@ -29,7 +35,7 @@ public class User {
 		
 		while(itEmails.hasNext()) {
 			var actualEmail = itEmails.next();
-			if (host.equals(actualEmail.getEmail())) {
+			if (actualEmail.getEmail().contains(host)) {
 				return actualEmail;
 			}
 		}

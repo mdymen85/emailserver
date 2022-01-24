@@ -22,6 +22,7 @@ public class RedisMessagesService {
 		if (cachedUser == null) {						
 			var user = this.userRepository.loadUserEmails(username);
 			mapUser.put(CACHE_NAME, user);
+			cachedUser = user;
 		}
 		
 		return cachedUser;

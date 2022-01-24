@@ -1,6 +1,8 @@
-package com.bmc.emailserver.mail;
+package com.bmc.emailserver.domain;
 
 import java.util.Set;
+
+import com.bmc.emailserver.mail.exception.IncorrectParameterException;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -17,22 +19,22 @@ public class MessageToSend {
 	private String password;
 	
 	@Builder
-	public MessageToSend(String from, Set<String> recipients, String subject, String text, String password) {
+	public MessageToSend(String from, Set<String> recipients, String subject, String text, String password) throws IncorrectParameterException {
 		
 		if (from == null || from.equals("")) {
-			throw new IllegalStateException();
+			throw new IncorrectParameterException("from");
 		}
 		
 		if (recipients == null || recipients.size() < 1) {
-			throw new IllegalStateException();
+			throw new IncorrectParameterException("recipients");
 		}
 		
 		if (subject == null || subject.equals("")) {
-			throw new IllegalStateException();
+			throw new IncorrectParameterException("subjects");
 		}
 		
 		if (text == null || text.equals("")) {
-			throw new IllegalStateException();
+			throw new IncorrectParameterException("body");
 		}
 		
 		this.from = from;

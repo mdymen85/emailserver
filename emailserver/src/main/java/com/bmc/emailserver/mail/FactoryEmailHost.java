@@ -2,7 +2,7 @@ package com.bmc.emailserver.mail;
 
 public enum FactoryEmailHost {
 
-	YAHOO("yahoo.com", new SendYahoo()),GOOGLE("google.com", new SendGmail()),WALLA("walla.com.il", new SendWalla());
+	YAHOO("yahoo.com", new SendYahoo()),GOOGLE("gmail.com", new SendGmail()),WALLA("walla.com.il", new SendWalla());
 	
 	private String host;
 	private AbstractSendMail sendMail;

@@ -7,15 +7,17 @@ import java.util.regex.Pattern;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
+import com.bmc.emailserver.domain.MessageToSend;
 import com.bmc.emailserver.domain.User;
 import com.bmc.emailserver.dto.MessageDTO;
+import com.bmc.emailserver.mail.exception.IncorrectParameterException;
 import com.bmc.emailserver.redis.UserInformationService;
 
 public class SendMail {
 	
 	private static String HOST_REGEX = "(?<=@)\\\\S+";
 
-	public void sendMail(MessageDTO messageDTO, String username) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException {
+	public void sendMail(MessageDTO messageDTO, String username) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException, IncorrectParameterException {
 		
 		Pattern regex = Pattern.compile("(?<=@)\\S+");
 		Matcher regexMatcher = regex.matcher(messageDTO.getFrom());
@@ -43,7 +45,7 @@ public class SendMail {
 		throw new IllegalStateException();
 	}
 	
-	private MessageToSend toMessageToSend(MessageDTO messageDTO, String password) {		
+	private MessageToSend toMessageToSend(MessageDTO messageDTO, String password) throws IncorrectParameterException {		
 		return MessageToSend
 				.builder()
 				.from(messageDTO.getFrom())

@@ -7,9 +7,10 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
 import com.bmc.emailserver.dto.MessageDTO;
+import com.bmc.emailserver.mail.exception.IncorrectParameterException;
 
 public interface ISendMailService {
 
-	public void sendMail(MessageDTO messageDTO, String username) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException;
+	public void sendMail(MessageDTO messageDTO, String username) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException, IncorrectParameterException;
 	
 }

@@ -8,6 +8,7 @@ import javax.mail.internet.AddressException;
 
 import com.bmc.emailserver.dto.MessageDTO;
 import com.bmc.emailserver.mail.SendMail;
+import com.bmc.emailserver.mail.exception.IncorrectParameterException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,7 +17,7 @@ public class SendMailService implements ISendMailService {
 	private SendMail sendMail = new SendMail();
 	
 	@Override
-	public void sendMail(MessageDTO messageDTO, String sendMail) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException {
+	public void sendMail(MessageDTO messageDTO, String sendMail) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException, IncorrectParameterException {
 		this.sendMail.sendMail(messageDTO, sendMail);
 		
 	}

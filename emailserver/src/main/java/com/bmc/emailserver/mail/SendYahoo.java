@@ -6,6 +6,8 @@ import java.util.Properties;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 
+import com.bmc.emailserver.domain.MessageToSend;
+
 public class SendYahoo extends AbstractSendMail {
 
 	@Override
@@ -28,11 +30,9 @@ public class SendYahoo extends AbstractSendMail {
                      protected PasswordAuthentication getPasswordAuthentication()
                      {
                     	 return new PasswordAuthentication(messageToSend.getFrom(), messageToSend.getPassword());
-                    	 //return new PasswordAuthentication("martin.dymenstein@yahoo.com", "oejtgdmwxgjarjnp");
                      }
                 });
 
-	    /** Ativa Debug para sessão */
 	    session.setDebug(true);
 		this.setSession(session);
 	}

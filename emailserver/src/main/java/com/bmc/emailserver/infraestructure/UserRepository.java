@@ -52,7 +52,7 @@ public class UserRepository implements IUserRepository {
 
 		var google = UserEmailEntity.builder()
 				.email("martin.dymenstein@gmail.com")
-				.password("")
+				.password("bcraamspiilnas")
 				.username("admin")
 				.build();
 

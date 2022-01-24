@@ -11,6 +11,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,42 +19,27 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
-//import com.auth0.jwt.JWT;
-//import com.auth0.jwt.algorithms.Algorithm;
-//import com.auth0.jwt.exceptions.JWTCreationException;
-import com.bmc.emailserver.YahooEmail;
 import com.bmc.emailserver.dto.MessageDTO;
 import com.bmc.emailserver.dto.Usuario;
+import com.bmc.emailserver.exception.ErrorObject;
 import com.bmc.emailserver.mail.SendMail;
+import com.bmc.emailserver.mail.exception.IncorrectParameterException;
 import com.bmc.emailserver.mail.service.ISendMailService;
 import com.bmc.emailserver.mail.service.SendMailService;
 
 
 @Path("/email")
-@javax.enterprise.context.RequestScoped
+//@javax.enterprise.context.RequestScoped
 @Transactional
 public class SendController {
 
-	private YahooEmail yahooEmail = new YahooEmail();
 	private ISendMailService sendMailService = new SendMailService();
-
-	
-//	
-//	@Inject
-//	public SendController(YahooEmail yahooEmail) {
-//		this.yahooEmail = yahooEmail;
-//	}
 	
 	public SendController() {}
 	
-	@GET
-//	@Produces(MediaType.APPLICATION_JSON)
-	public void get() {
-	
-		System.out.println("PASOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-		this.yahooEmail.send();
-	}
 	
 	private String getUsername(HttpHeaders headers) {
 		var token = headers.getRequestHeaders().get("Authorization").get(0);
@@ -61,32 +47,18 @@ public class SendController {
 	}
 	
 	@POST
-	public void post(MessageDTO message, @Context HttpHeaders headers) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException {
+    @Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response post(MessageDTO message, @Context HttpHeaders headers) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException, IncorrectParameterException {
 		
 		var username = this.getUsername(headers); 
 		
 		sendMailService.sendMail(message, username);
-		System.out.println(message);
+		
+		return Response
+				.status(201)
+				.build();
 		
 	}
-
-	@POST
-	@Path("/x")
-	public void post2(MessageDTO message) throws Exception {
-		
-		System.out.println("asfafsdf");
-		
-//		try {
-//		    Algorithm algorithm = Algorithm.HMAC256("secret");
-//		    String token = JWT.create()
-//		        .withIssuer("auth0")
-//		        .sign(algorithm);
-//		    
-//		    return token;
-//		} catch (JWTCreationException exception){
-//		    //Invalid Signing configuration / Couldn't convert Claims.
-//			throw new Exception();
-//		}
-		
-	}
+	
 }

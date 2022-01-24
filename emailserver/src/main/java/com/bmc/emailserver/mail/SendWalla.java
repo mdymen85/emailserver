@@ -1,5 +1,7 @@
 package com.bmc.emailserver.mail;
 
+import com.bmc.emailserver.domain.MessageToSend;
+
 public class SendWalla extends AbstractSendMail {
 
 	@Override
