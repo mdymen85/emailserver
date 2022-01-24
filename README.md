@@ -104,5 +104,5 @@ Set<UserEmailEntity> findEmailsByUsername(String username) {
 ```
 I didn`t use a database because i think its not the porpuse of the excercise, so i mocked the database request for information as the above method shows. If there exists a desire to use a database, to pick the wanted information, it just need to connect and return the **Set<UserEmailEntity>** with the data that is in the database. This means that the application has a decouple layer, that can be replace with relational database, noSql, and else.
 
-
+## Redis - tradeoff
 
