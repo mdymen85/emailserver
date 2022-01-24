@@ -2,7 +2,7 @@
 
 ## Goal
 
-Send an email selecting from which account the user wants to send it, so he won't need to login every time in every account he wants to use.
+Send or load emails choosing from which account the user wantsto achieve this, so he won't need to login in differents websites everytime. In this occasion I didn't use **Spring Boot**. As a server i used **Glashfish** and i implemented the REST communication with **JAX-RS**.
 
 ## Main parts
 
