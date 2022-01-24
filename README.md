@@ -72,5 +72,37 @@ For load one instance of **redis**, for example, i used **singleton**, because i
 
 ![](https://github.com/mdymen85/emailserver/blob/main/factory.png)
 
+## Login user
+
+As i mentioned before, exists an other module that it can be used for the client to request a JWT token. Inside this token is the username of the client, so everytime the main application receives a request for an operation, it will pick from the token, the username. With this information, it will pick the information of the connection, to authenticate to the email server, so the client can use their email inside the application. Its importante to say that i had to do manual configurations in the email i used, to allow third applications to use the accounts.
+
+```
+Set<UserEmailEntity> findEmailsByUsername(String username) {
+		
+	var yahoo = UserEmailEntity.builder()
+			.email("martin.dymenstein@yahoo.com")
+			.password("oejtgdmwxgjarjnp")
+			.username("admin")
+			.build();
+
+	var google = UserEmailEntity.builder()
+			.email("martin.dymenstein@gmail.com")
+			.password("bcraamspiilnas")
+			.username("admin")
+			.build();
+
+	var walla = UserEmailEntity.builder()
+			.email("martin.dymenstein@walla.com")
+			.password("")
+			.username("admin")
+			.build();
+
+
+	return Set.of(yahoo, google, walla);
+	}
+}
+```
+I didn`t use a database because i think its not the porpuse of the excercise, so i mocked the database request for information as the above method shows. If there exists a desire to use a database, to pick the wanted information, it just need to connect and return the **Set<UserEmailEntity>** with the data that is in the database. This means that the application has a decouple layer, that can be replace with relational database, noSql, and else.
+
 
 
