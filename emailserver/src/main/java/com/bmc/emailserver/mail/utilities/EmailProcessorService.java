@@ -1,4 +1,4 @@
-package com.bmc.emailserver.mail;
+package com.bmc.emailserver.mail.utilities;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -14,7 +14,7 @@ import com.bmc.emailserver.domain.User;
 import com.bmc.emailserver.dto.MessageDTO;
 import com.bmc.emailserver.mail.exception.IncorrectParameterException;
 
-public class SendMail {
+public class EmailProcessorService {
 	
 	private static String HOST_REGEX = "(?<=@)\\\\S+";
 	

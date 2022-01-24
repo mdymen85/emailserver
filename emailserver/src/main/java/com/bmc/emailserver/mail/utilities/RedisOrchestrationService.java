@@ -1,4 +1,4 @@
-package com.bmc.emailserver.mail;
+package com.bmc.emailserver.mail.utilities;
 
 import org.redisson.api.RMapCache;
 

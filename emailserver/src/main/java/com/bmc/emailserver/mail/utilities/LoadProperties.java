@@ -1,4 +1,4 @@
-package com.bmc.emailserver.mail;
+package com.bmc.emailserver.mail.utilities;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class LoadProperties {
 
-	protected Properties loadProperties() throws IOException {
+	public Properties loadProperties() throws IOException {
 		InputStream inputStream = null;
 		Properties prop = new Properties();
 		

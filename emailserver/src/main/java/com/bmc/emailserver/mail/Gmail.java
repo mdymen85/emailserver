@@ -9,7 +9,7 @@ import javax.mail.Session;
 import com.bmc.emailserver.domain.IEmailSession;
 import com.bmc.emailserver.domain.LoadMessages;
 
-public class SendGmail extends AbstractSendMail {
+public class Gmail extends AbstractdMail {
 
 	@Override
 	public void loadProperties() throws IOException {

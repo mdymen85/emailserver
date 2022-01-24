@@ -12,7 +12,7 @@ import javax.mail.Store;
 import com.bmc.emailserver.domain.IEmailSession;
 import com.bmc.emailserver.domain.LoadMessages;
 
-public class SendYahoo extends AbstractSendMail {
+public class Yahoo extends AbstractdMail {
 
 	@Override
 	public void loadProperties() throws IOException {

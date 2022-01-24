@@ -17,10 +17,12 @@ import com.bmc.emailserver.domain.EmailMessage;
 import com.bmc.emailserver.domain.IEmailSession;
 import com.bmc.emailserver.domain.LoadMessages;
 import com.bmc.emailserver.domain.MessageToSend;
+import com.bmc.emailserver.mail.utilities.LoadProperties;
+
 import lombok.Getter;
 
 @Getter
-public abstract class AbstractSendMail {
+public abstract class AbstractdMail {
 
 	private Properties properties;
 	private Session session;

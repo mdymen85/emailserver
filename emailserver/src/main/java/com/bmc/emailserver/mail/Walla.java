@@ -4,7 +4,7 @@ import com.bmc.emailserver.domain.IEmailSession;
 import com.bmc.emailserver.domain.LoadMessages;
 import com.bmc.emailserver.domain.MessageToSend;
 
-public class SendWalla extends AbstractSendMail {
+public class Walla extends AbstractdMail {
 
 	@Override
 	public void loadProperties() {

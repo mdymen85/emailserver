@@ -7,12 +7,12 @@ import javax.mail.internet.AddressException;
 
 import com.bmc.emailserver.domain.EmailMessage;
 import com.bmc.emailserver.dto.MessageDTO;
-import com.bmc.emailserver.mail.SendMail;
 import com.bmc.emailserver.mail.exception.IncorrectParameterException;
+import com.bmc.emailserver.mail.utilities.EmailProcessorService;
 
 public class SendMailService implements ISendMailService {
 	
-	private SendMail sendMail = new SendMail();
+	private EmailProcessorService sendMail = new EmailProcessorService();
 	
 	@Override
 	public void sendMail(MessageDTO messageDTO, String sendMail) throws AddressException, MessagingException, IllegalStateException, IOException, InterruptedException, IncorrectParameterException {
