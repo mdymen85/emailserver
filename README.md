@@ -21,3 +21,40 @@ I simplfyied the username signed in, so there are just one possible user called 
 **emailserver** for sending and loading emails.
 
 ![](https://github.com/mdymen85/emailserver/blob/main/interaction.png)
+
+In the following diagram we can see the main flow. A client first need to ask for the token, then will request to send an email, and the emailserver will ask for the information to reds, and then will send the email, using the email the user wrote in the request, as follow:
+
+```
+curl --location --request POST 'localhost:8081/email' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwiaWF0IjoxNjQzMDQ1MjUxLCJzdWIiOiIiLCJpc3MiOiJhZG1pbiIsImV4cCI6MTY0MzA0ODg1MX0.u0ZEowkbEgB5_AtSLdRjlt-YPuJZWgjYULQH5hrJSRA' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "from":"martin.dymenstein@yahoo.com",
+    "to":["martin@dymensteincom"],
+    "subject":"subject to send",
+    "body":"text, content to send"
+}'
+```
+Also, the client has the possibility to pick the emails he wants to read by using the following request:
+
+```
+curl --location --request GET 'localhost:8081/email/martin.dymenstein@yahoo.com/2' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwiaWF0IjoxNjQzMDQ1MjUxLCJzdWIiOiIiLCJpc3MiOiJhZG1pbiIsImV4cCI6MTY0MzA0ODg1MX0.u0ZEowkbEgB5_AtSLdRjlt-YPuJZWgjYULQH5hrJSRA'
+```
+In this case, the client is asking for the second -2- page of emails in their yahoo account. The number of emails that are being returning is something it can be configured in the **app.properties** by updating the property **application.max-load.emails**
+
+
+## Architecture
+
+As i point in the next image, i tryied to use **hexagonal architecture** with **domain driven design**. The domain communicates with the other parts of the system by interfaces --**ports**-- leaving the main activity to the **domain** sector. I wanted to insert business logic, just as validations, inside de domain. Because of that i develop objects for the infraestructure part --**repository**- and DTOs in the controller, to decouple the domain between the other layers, so this layers could be replaced easily.
+
+![](https://github.com/mdymen85/emailserver/blob/main/architecture.png)
+
+## Main components
+
+As we can see in the following picture: there are a group of packages that manage receiving the requests from outside, and validate if the token its ok. This logic layer has a comunication, using an interface, with the domain logic. The domain logic will figure it out how to send the email according to the desire of the client. Also loads the emails from the account selected by a GET request. This layer will comunicate, using other interface, with the repository layer, that is the layer that manage to pick up the needed data.
+
+![](https://github.com/mdymen85/emailserver/blob/main/packages.png)
+
+
+
