@@ -1,4 +1,4 @@
-# EmailServier
+# EmailServer
 
 ## Goal
 
