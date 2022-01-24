@@ -56,5 +56,21 @@ As we can see in the following picture: there are a group of packages that manag
 
 ![](https://github.com/mdymen85/emailserver/blob/main/packages.png)
 
+## Design Patterns
+
+In the code i used design patterns as **builder**, to create objects with the library **lombok**:
+
+```
+<dependency>
+	<groupId>org.projectlombok</groupId>
+	<artifactId>lombok</artifactId>
+	<version>1.18.22</version>
+	<scope>provided</scope>
+</dependency>
+```
+For load one instance of **redis**, for example, i used **singleton**, because i don't need to create new instances of the object everytime i want to use it. To select what email i will use to send or load information, i developed a **factory** with an enum, so the factory will give me the instance -based on the host- i will need to use with the information of connection to the email server. So, passing just the host, i will get the instance -yahoo, gmail, walla- to use to send or load emails. I used **template method** because i have generic information to send or load emails, that all implementations must use, but also i have specific information, such as password or connection attributes, that depends on the host i use, that must be implemented in the subclasses. This approach is in the following image:
+
+![](https://github.com/mdymen85/emailserver/blob/main/factory.png)
+
 
 
