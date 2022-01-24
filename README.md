@@ -19,3 +19,5 @@ curl --location --request POST 'localhost:9090/login' \
 ```
 I simplfyied the username signed in, so there are just one possible user called **admin**. After getting the token, it will be possible to request the main module
 **emailserver** for sending and loading emails.
+
+![](https://github.com/mdymen85/emailserver/blob/main/interaction.png)
