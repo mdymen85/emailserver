@@ -6,7 +6,8 @@ import java.util.Properties;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 
-import com.bmc.emailserver.domain.MessageToSend;
+import com.bmc.emailserver.domain.IEmailSession;
+import com.bmc.emailserver.domain.LoadMessages;
 
 public class SendGmail extends AbstractSendMail {
 
@@ -26,12 +27,14 @@ public class SendGmail extends AbstractSendMail {
 	}
 
 	@Override
-	public void loadSession(MessageToSend messageToSend) {
+	public void loadSession(IEmailSession iEmailSession) {
+		//https://myaccount.google.com/lesssecureapps		
+		
         Session session = Session.getInstance(this.getProperties(), new javax.mail.Authenticator() {
 
             protected PasswordAuthentication getPasswordAuthentication() {
 
-                return new PasswordAuthentication(messageToSend.getFrom(), messageToSend.getPassword());
+                return new PasswordAuthentication(iEmailSession.getEmail(), iEmailSession.getPassword());
 
             }
 
@@ -39,6 +42,12 @@ public class SendGmail extends AbstractSendMail {
 
         session.setDebug(true);
 		this.setSession(session);
+	}
+
+	@Override
+	protected void loadMessages(LoadMessages loadMessages) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

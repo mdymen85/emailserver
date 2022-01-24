@@ -8,7 +8,6 @@ import javax.ws.rs.core.Application;
 
 import com.bmc.emailserver.authentication.BearerTokenFilter;
 import com.bmc.emailserver.mail.exception.IncorrectParameterExceptionHandler;
-import com.bmc.emailserver.mail.service.SendMailService;
 
 @ApplicationPath("/api")
 public class RestApplication extends Application {

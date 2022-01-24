@@ -2,14 +2,8 @@ package com.bmc.emailserver.controller;
 
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.interceptor.Interceptors;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
-import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -21,18 +15,15 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 
 import com.bmc.emailserver.dto.MessageDTO;
-import com.bmc.emailserver.dto.Usuario;
-import com.bmc.emailserver.exception.ErrorObject;
-import com.bmc.emailserver.mail.SendMail;
 import com.bmc.emailserver.mail.exception.IncorrectParameterException;
 import com.bmc.emailserver.mail.service.ISendMailService;
 import com.bmc.emailserver.mail.service.SendMailService;
 
 
 @Path("/email")
-//@javax.enterprise.context.RequestScoped
 @Transactional
 public class SendController {
 
@@ -56,9 +47,34 @@ public class SendController {
 		sendMailService.sendMail(message, username);
 		
 		return Response
-				.status(201)
+				.status(Status.CREATED)
 				.build();
 		
+	}
+	
+	@GET
+	@Path("/{email}/{page}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response get(@Context UriInfo info, @Context HttpHeaders headers) throws InterruptedException, MessagingException, IOException {
+		
+		var username = this.getUsername(headers); 
+		
+		String email = info.getPathSegments().get(1).getPath();
+		
+		var page = 1;
+		
+		if (info.getPathSegments().size() > 2) {
+			page = Integer.parseInt(info.getPathSegments().get(2).getPath());
+		}
+	
+		
+		var emails = sendMailService.loadMails(email, username, page);
+		
+		return Response
+				.status(Status.OK)
+				.entity(emails)
+				.build();
 	}
 	
 }

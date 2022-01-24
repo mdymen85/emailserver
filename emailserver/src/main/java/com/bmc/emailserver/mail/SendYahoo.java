@@ -3,10 +3,14 @@ package com.bmc.emailserver.mail;
 import java.io.IOException;
 import java.util.Properties;
 
+import javax.mail.Folder;
+import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.Store;
 
-import com.bmc.emailserver.domain.MessageToSend;
+import com.bmc.emailserver.domain.IEmailSession;
+import com.bmc.emailserver.domain.LoadMessages;
 
 public class SendYahoo extends AbstractSendMail {
 
@@ -24,17 +28,30 @@ public class SendYahoo extends AbstractSendMail {
 	}
 
 	@Override
-	public void loadSession(MessageToSend messageToSend) {
+	public void loadSession(IEmailSession iEmailSession) {
         Session session = Session.getDefaultInstance(this.getProperties(),
                 new javax.mail.Authenticator() {
                      protected PasswordAuthentication getPasswordAuthentication()
                      {
-                    	 return new PasswordAuthentication(messageToSend.getFrom(), messageToSend.getPassword());
+                    	 return new PasswordAuthentication(iEmailSession.getEmail(), iEmailSession.getPassword());
                      }
                 });
 
 	    session.setDebug(true);
 		this.setSession(session);
+	}
+
+	@Override
+	protected void loadMessages(LoadMessages loadMessages) throws IOException, MessagingException {
+	    Store store = this.getSession().getStore("imaps");
+	    
+		var properties = this.getLoadProperties().loadProperties();
+
+	    store.connect(properties.getProperty("application.yahoo.imap.mail.yahoo.com"),loadMessages.getEmail(), loadMessages.getPassword());
+	    
+	    Folder emailFolder = store.getFolder("Inbox");
+	    emailFolder.open(Folder.READ_ONLY);
+		this.setFolder(emailFolder); 
 	}
 
 }

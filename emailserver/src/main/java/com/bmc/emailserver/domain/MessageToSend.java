@@ -9,10 +9,9 @@ import lombok.Getter;
 import lombok.Singular;
 
 @Getter
-public class MessageToSend {
+public class MessageToSend implements IEmailSession {
 	
 	private String from;
-	@Singular("recipient")
 	private Set<String> recipients;
 	private String subject;
 	private String text;
@@ -42,6 +41,11 @@ public class MessageToSend {
 		this.subject = subject;
 		this.text = text;
 		this.password = password;
+	}
+
+	@Override
+	public String getEmail() {
+		return this.from;
 	}
 
 	

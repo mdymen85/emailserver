@@ -1,7 +1,5 @@
 package com.bmc.emailserver.redis;
 
-import org.redisson.api.RedissonClient;
-
 public class RedisSingleton {
 
 	private static RedisService redisService;
