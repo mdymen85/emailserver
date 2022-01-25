@@ -128,3 +128,7 @@ It will be fine to load and cache the emails received, we must have a policy to 
 
 Glassfish allow multithread, and the application can work with it, thats why in many cases i used the singleton pattern, to not create many instances of an object, in order to avoid bad memory usage.
 
+## Next steps
+
+Something that will be nice is to dockerize the application. Push both separe applications in images in docker hub, and then, maybe, construct a docker-compose to create the three images in an instance, or just pull the images independently.
+
