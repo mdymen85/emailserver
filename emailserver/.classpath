@@ -63,7 +63,8 @@
   <classpathentry kind="var" path="M2_REPO/io/projectreactor/reactor-core/3.4.4/reactor-core-3.4.4.jar" sourcepath="M2_REPO/io/projectreactor/reactor-core/3.4.4/reactor-core-3.4.4-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/redisson/redisson/3.16.4/redisson-3.16.4.jar" sourcepath="M2_REPO/org/redisson/redisson/3.16.4/redisson-3.16.4-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/io/reactivex/rxjava3/rxjava/3.0.12/rxjava-3.0.12.jar" sourcepath="M2_REPO/io/reactivex/rxjava3/rxjava/3.0.12/rxjava-3.0.12-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar" sourcepath="M2_REPO/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.8.0-beta4/slf4j-api-1.8.0-beta4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-simple/1.8.0-beta4/slf4j-simple-1.8.0-beta4.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/yaml/snakeyaml/1.27/snakeyaml-1.27.jar" sourcepath="M2_REPO/org/yaml/snakeyaml/1.27/snakeyaml-1.27-sources.jar">
     <attributes>
       <attribute value="jar:file:/home/mtuser/.m2/repository/org/yaml/snakeyaml/1.27/snakeyaml-1.27-javadoc.jar!/" name="javadoc_location"/>

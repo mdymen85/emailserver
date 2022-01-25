@@ -6,7 +6,9 @@ import java.util.Iterator;
 import java.util.Set;
 
 import lombok.Builder;
+import lombok.ToString;
 
+@ToString
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;

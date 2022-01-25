@@ -4,9 +4,10 @@ import java.util.Set;
 
 import com.bmc.emailserver.domain.Email;
 import com.bmc.emailserver.domain.User;
-import com.bmc.emailserver.domain.repository.IUserRepository;
-import com.bmc.emailserver.domain.repository.UserEmailEntity;
+import com.bmc.emailserver.infraestructure.repository.IUserRepository;
+import com.bmc.emailserver.infraestructure.repository.UserEmailEntity;
 
+import lombok.extern.slf4j.Slf4j;
 
 public class UserRepository implements IUserRepository {
 
@@ -43,6 +44,8 @@ public class UserRepository implements IUserRepository {
 	}
 	
 	private Set<UserEmailEntity> findEmailsByUsername(String username) {
+		
+		//TODO: The correct way is to save this passwords encrypted and decrypt when need to create the email session
 		
 		var yahoo = UserEmailEntity.builder()
 				.email("martin.dymenstein@yahoo.com")

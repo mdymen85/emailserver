@@ -2,13 +2,15 @@ package com.bmc.emailserver.domain;
 
 import java.util.Set;
 
-import com.bmc.emailserver.mail.exception.IncorrectParameterException;
+import com.bmc.emailserver.domain.mail.exception.IncorrectParameterException;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class MessageToSend implements IEmailSession {
 	
 	private String from;
