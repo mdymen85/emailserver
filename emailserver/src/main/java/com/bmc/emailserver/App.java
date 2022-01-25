@@ -3,18 +3,6 @@ package com.bmc.emailserver;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Calendar;
-//import java.util.Properties;
-//
-//import javax.mail.Folder;
-//import javax.mail.Message;
-//import javax.mail.MessagingException;
-//import javax.mail.PasswordAuthentication;
-//import javax.mail.Session;
-//import javax.mail.Store;
-//import javax.mail.Transport;
-//import javax.mail.internet.AddressException;
-//import javax.mail.internet.InternetAddress;
-//import javax.mail.internet.MimeMessage;
 
 import javax.ws.rs.core.UriBuilder;
 
