@@ -116,8 +116,9 @@ If Redis is off, the application can`t stop. The most elegant way of implementin
 
 ### Email loading not cached
 
-It will be fine to load and cache the emails received, we must have a policy to update those emails because, at the end, we can read dirty information...
+It will be fine to load and cache the emails received, we must have a policy to update those emails because, at the end, we can read dirty information if we are reading from the cache and we receive new emails. Also, must study about concurrency, because can happend that one thread is aggregating the cache while other can thread using the same accout its loading the email information with new emails received.
 
 ## Multi-thread
 
+Glassfish allow multithread, and the application can work with it, thats why in many cases i used the singleton pattern, to not create many instances of an object, in order to avoid bad memory usage.
 
