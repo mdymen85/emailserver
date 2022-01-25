@@ -110,3 +110,14 @@ Redis in this application enters in a trade off status. I decided to use it beca
 In other hand, we can use local cache, inside the instances, managed by the application. This is not a scalable solution, because all instances has to add the information in their cache, so it can happend that: if we have a gateway, elb or else infront of the application, we might never repeat an instance that the information is cached. But, the advantage is that we don't have any extra latency when we want to retrieve data from the cache. In applications that runs in very few instances, it might be more confortable to have just local cache and not distributed cache.
 How to implement this local cache? We need a structure such as HashTable, that needs to be Thread-Safe in order to share the same table between threads.
 
+### Circuit breaker
+
+If Redis is off, the application can`t stop. The most elegant way of implementing this, is developing a circuit breaker when we achive some connection tentatives, in this case, we must ignore the redis exception and load the data from the database. In this case, to simplify the development, we just load the data in the catch exception.
+
+### Email loading not cached
+
+It will be fine to load and cache the emails received, we must have a policy to update those emails because, at the end, we can read dirty information...
+
+## Multi-thread
+
+
