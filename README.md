@@ -132,3 +132,5 @@ Glassfish allow multithread, and the application can work with it, thats why in 
 
 Something that will be nice is to dockerize the application. Push both separe applications in images in docker hub, and then, maybe, construct a docker-compose to create the three images in an instance, or just pull the images independently.
 
+Idempotency treatment: request must be idempotent, so if happend to receive more than one time the request with the same id, musn`t do the request, but needs to return to the client the same results as the first one.
+
