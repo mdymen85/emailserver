@@ -134,3 +134,5 @@ Something that will be nice is to dockerize the application. Push both separe ap
 
 Idempotency treatment: request must be idempotent, so if happend to receive more than one time the request with the same id, musn`t do the request, but needs to return to the client the same results as the first one.
 
+Sending email can get a lot of lag, so do it in an async way can help performance when we have many request.
+
