@@ -22,7 +22,7 @@ I simplfyied the username signed in, so there are just one possible user called 
 
 ![](https://github.com/mdymen85/emailserver/blob/main/interaction.png)
 
-In the following diagram we can see the main flow. A client first need to ask for the token, then will request to send an email, and the emailserver will ask for the information to reds, and then will send the email, using the email the user wrote in the request, as follow:
+In the following diagram we can see the main flow. A client first need to ask for the token, then will request to send an email, and the emailserver will ask for the information to redis, and then will send the email, using the email the user wrote in the request, as follow:
 
 ```
 curl --location --request POST 'localhost:8081/email' \
@@ -30,7 +30,7 @@ curl --location --request POST 'localhost:8081/email' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "from":"martin.dymenstein@yahoo.com",
-    "to":["martin@dymensteincom"],
+    "to":["martin@dymenstein.com"],
     "subject":"subject to send",
     "body":"text, content to send"
 }'
