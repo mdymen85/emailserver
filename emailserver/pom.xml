@@ -77,6 +77,13 @@
 	    <groupId>org.glassfish.jersey.ext.cdi</groupId>
 	    <artifactId>jersey-cdi1x-servlet</artifactId>
 	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.ext.cdi/jersey-cdi1x -->
+	<dependency>
+	    <groupId>org.glassfish.jersey.ext.cdi</groupId>
+	    <artifactId>jersey-cdi1x</artifactId>
+	</dependency>
+	
 		
 		
 	<dependency>
@@ -141,7 +148,14 @@
 	    <artifactId>slf4j-simple</artifactId>
 	    <version>1.8.0-beta4</version>
 	</dependency>
- 
+		
+<!-- https://mvnrepository.com/artifact/javax.enterprise/cdi-api -->
+<dependency>
+    <groupId>javax.enterprise</groupId>
+    <artifactId>cdi-api</artifactId>
+    <version>2.0</version>
+</dependency>
+
     
   </dependencies>
   
@@ -160,19 +174,43 @@
   <build>
 <!--     <pluginManagement>lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
-		<plugin>  
-            <!-- Build an executable JAR -->  
-            <groupId>org.apache.maven.plugins</groupId>  
-            <artifactId>maven-jar-plugin</artifactId>  
-            <version>3.1.0</version>  
-            <configuration>  
-                <archive>  
-                    <manifest>  
-                        <mainClass>com.bmc.emailserver.App</mainClass>  
-                    </manifest>  
-                </archive>  
-            </configuration>  
-        </plugin>  
+ 			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.1</version>
+
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+	                <archive>  
+	                    <manifest>  
+	                        <mainClass>com.bmc.emailserver.App</mainClass>  
+	                    </manifest>  
+	                </archive>                      
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+            </plugin>      
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>

@@ -8,6 +8,7 @@
   <classpathentry kind="var" path="M2_REPO/org/glassfish/hk2/external/aopalliance-repackaged/2.5.0-b42/aopalliance-repackaged-2.5.0-b42.jar" sourcepath="M2_REPO/org/glassfish/hk2/external/aopalliance-repackaged/2.5.0-b42/aopalliance-repackaged-2.5.0-b42-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/bytebuddy/byte-buddy/1.11.0/byte-buddy-1.11.0.jar" sourcepath="M2_REPO/net/bytebuddy/byte-buddy/1.11.0/byte-buddy-1.11.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/cache/cache-api/1.0.0/cache-api-1.0.0.jar" sourcepath="M2_REPO/javax/cache/cache-api/1.0.0/cache-api-1.0.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/enterprise/cdi-api/2.0/cdi-api-2.0.jar" sourcepath="M2_REPO/javax/enterprise/cdi-api/2.0/cdi-api-2.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/glassfish/grizzly/grizzly-framework/2.4.3/grizzly-framework-2.4.3.jar" sourcepath="M2_REPO/org/glassfish/grizzly/grizzly-framework/2.4.3/grizzly-framework-2.4.3-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/glassfish/grizzly/grizzly-http/2.4.3/grizzly-http-2.4.3.jar" sourcepath="M2_REPO/org/glassfish/grizzly/grizzly-http/2.4.3/grizzly-http-2.4.3-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/glassfish/grizzly/grizzly-http-server/2.4.3/grizzly-http-server-2.4.3.jar" sourcepath="M2_REPO/org/glassfish/grizzly/grizzly-http-server/2.4.3/grizzly-http-server-2.4.3-sources.jar"/>
@@ -23,8 +24,10 @@
   <classpathentry kind="var" path="M2_REPO/javax/javaee-api/7.0/javaee-api-7.0.jar" sourcepath="M2_REPO/javax/javaee-api/7.0/javaee-api-7.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/javassist/javassist/3.22.0-CR2/javassist-3.22.0-CR2.jar" sourcepath="M2_REPO/org/javassist/javassist/3.22.0-CR2/javassist-3.22.0-CR2-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar" sourcepath="M2_REPO/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/el/javax.el-api/3.0.0/javax.el-api-3.0.0.jar" sourcepath="M2_REPO/javax/el/javax.el-api/3.0.0/javax.el-api-3.0.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" sourcepath="M2_REPO/javax/inject/javax.inject/1/javax.inject-1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/glassfish/hk2/external/javax.inject/2.5.0-b42/javax.inject-2.5.0-b42.jar" sourcepath="M2_REPO/org/glassfish/hk2/external/javax.inject/2.5.0-b42/javax.inject-2.5.0-b42-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/interceptor/javax.interceptor-api/1.2/javax.interceptor-api-1.2.jar" sourcepath="M2_REPO/javax/interceptor/javax.interceptor-api/1.2/javax.interceptor-api-1.2-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/sun/mail/javax.mail/1.6.2/javax.mail-1.6.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/ws/rs/javax.ws.rs-api/2.1.1/javax.ws.rs-api-2.1.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jboss/marshalling/jboss-marshalling/2.0.11.Final/jboss-marshalling-2.0.11.Final.jar" sourcepath="M2_REPO/org/jboss/marshalling/jboss-marshalling/2.0.11.Final/jboss-marshalling-2.0.11.Final-sources.jar"/>

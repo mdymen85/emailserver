@@ -31,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Path("/email")
 @Transactional
+@SneakyThrows
 public class SendController {
 
 	private ISendMailService sendMailService = new SendMailService();
@@ -62,6 +63,7 @@ public class SendController {
 					.build();
 		}
 		catch (Exception e) {
+			log.error("error: {} ", e.getStackTrace());
 			throw e;			
 		}
 	}
@@ -70,24 +72,30 @@ public class SendController {
 	@Path("/{email}/{page}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response get(@Context UriInfo info, @Context HttpHeaders headers) throws InterruptedException, MessagingException, IOException, IncorrectParameterException, IncorrectHostException {
-		
-		var username = this.getUsername(headers); 
-		
-		String email = info.getPathSegments().get(1).getPath();
-		
-		var page = 1;
-		
-		if (info.getPathSegments().size() > 2) {
-			page = Integer.parseInt(info.getPathSegments().get(2).getPath());
-		}
+	public Response get(@Context UriInfo info, @Context HttpHeaders headers) throws Exception {
+		try {
 			
-		var emails = sendMailService.loadMails(email, username, page);
-		
-		return Response
-				.status(Status.OK)
-				.entity(emails)
-				.build();
+			var username = this.getUsername(headers); 
+			
+			String email = info.getPathSegments().get(1).getPath();
+			
+			var page = 1;
+			
+			if (info.getPathSegments().size() > 2) {
+				page = Integer.parseInt(info.getPathSegments().get(2).getPath());
+			}
+				
+			var emails = sendMailService.loadMails(email, username, page);
+			
+			return Response
+					.status(Status.OK)
+					.entity(emails)
+					.build();
+		}
+		catch (Exception e) {
+			log.error("error: {} ", e.getStackTrace());
+			throw e;
+		}
 	}
 	
 }
