@@ -1,4 +1,4 @@
-# EmailServer
+# EmailServer: assessment for (BMC Software)[https://www.bmc.com/] from Israel
 
 ## Goal
 
